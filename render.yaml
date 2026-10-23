@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: litellm-proxy
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    envVars:
+      - key: PORT
+        value: 4000
+      - key: LITELLM_MASTER_KEY
+        generateValue: true
+      - key: OPENAI_API_KEY
+        sync: false
+    healthCheckPath: /health/liveliness
+    autoDeploy: true
